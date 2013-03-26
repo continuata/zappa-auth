@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    .row
+      .span6.offset2
+        .login
+          form.form-horizontal(action='/user/auth/index',method='post')
+            .control-group
+              .controls
+                h4 Login
+            .control-group
+              label.control-label(for='inputUsername') Username 
+              .controls
+                input#username(type='text', placeholder='Username', name='username')
+            .control-group
+              label.control-label(for='inputPassword') Password 
+              .controls
+                input#password(type='password', placeholder='Password', name='password')
+            .control-group
+              .controls
+                button.btn(type='submit') Login

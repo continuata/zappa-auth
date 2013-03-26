@@ -1,0 +1,48 @@
+doctype 5
+html
+  head 
+    title Auth Test
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    script(src='/js/bootstrap.js')    
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+  body
+    #in-nav
+      .container
+        .row
+          .span12           
+            ul.pull-right
+              if (username && (username != ''))
+                li: a(href='/page/profile') #{username}
+                li: a(href='/logout') Logout                  
+              else
+                li: a(href='/login') Login 
+    #in-sub-nav
+      .container
+        .row
+          .span12
+            ul#navigation_list           
+    .page
+      .page-container
+        block content
+  footer
+    .container
+      .row
+        .span12
+          p &copy; Copyright 2013 Continuata   
+  script
+    var links = !{JSON.stringify(links)}
+    var page = !{JSON.stringify(page)}
+
+    for (var link in links) {
+      var itemtitle = links[link].title
+      if(itemtitle) {
+        var className = links[link].class
+        var a = $("<a>").attr('href','/page/'+link)
+        if(page === link) a.addClass('active')
+        var icon = $("<i>").addClass('batch').addClass(className).appendTo(a)
+        var text = $("<br>").appendTo(a)
+        a.append(itemtitle)
+        var item = $("<li>").append(a)
+        $("#navigation_list").append(item)
+      }
+    }
